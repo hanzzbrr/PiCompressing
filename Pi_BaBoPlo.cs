@@ -5,7 +5,8 @@ using System.Text;
 public static class PiBaBoPlo
 {
     public static double Pid {get; private set;}
-    private const int NumHexDigits = 16;
+    public static string HexPid {get; private set;}
+    private const int NumHexDigits = 3;
     private const double Epsilon = 1e-17;
     private const int NumTwoPowers = 25;
 
@@ -13,10 +14,12 @@ public static class PiBaBoPlo
 
     public static void Run(int digitPosition)
     {
-        Stopwatch stopwatch = new Stopwatch();
-        stopwatch.Start();
+        // Stopwatch stopwatch = new Stopwatch();
+        // stopwatch.Start();
 
-        double pid, s1, s2, s3, s4;
+        // pid is fraction part of PI
+        double pid;
+        double s1, s2, s3, s4;
         string hexDigits;
 
         InitializeTwoPowers();
@@ -30,13 +33,14 @@ public static class PiBaBoPlo
         pid = 4d * s1 - 2d * s2 - s3 - s4;
         pid = pid - (int)pid + 1d;
         hexDigits = HexString(pid, NumHexDigits);
-        stopwatch.Stop();
-        System.Console.WriteLine("Tactks erased: " + stopwatch.ElapsedTicks);
+        // stopwatch.Stop();
+        
         Pid = pid;
-
+        HexPid = hexDigits;
+        // System.Console.WriteLine("Tactks erased: " + stopwatch.ElapsedTicks);
         Console.WriteLine("Position = {0}", digitPosition);
-        Console.WriteLine("Fraction = {0}", pid);
-        Console.WriteLine("Hex digits =  {0}", hexDigits.Substring(0, 10));
+        // Console.WriteLine("Fraction = {0}", pid);
+        Console.WriteLine("Hex digits =  {0}", hexDigits.ToString());
         
     }
 
