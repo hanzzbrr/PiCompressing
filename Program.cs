@@ -16,15 +16,26 @@ class Program
         // {
         //     Console.Write(bt + " ");
         // }
-        PiBaBoPlo.Run(0);
-        PiBaBoPlo.Run(1);
-        PiBaBoPlo.Run(2);
-        PiBaBoPlo.Run(3);
+        // (int, int) entry = GetEntry(int.Parse(args[0])).ToValueTuple();
+        // System.Console.WriteLine($"Blockstring entry is: {entry.Item1}, entry length is: {entry.Item2}");
+        PiBaBoPlo.Run(int.Parse(args[0])); // arg is position int num
     }
 
     public static Tuple<int, int> GetEntry(int block)
     {
-        return Tuple.Create(0,0);
+        string blockString = block.ToString();
+        
+        int index = 0;
+        int entryIndex = -1;
+        do
+        {
+            PiBaBoPlo.Run(index);
+            index++;
+            entryIndex = PiBaBoPlo.Pid.ToString().IndexOf(blockString); 
+        }while(entryIndex == -1);
+        System.Console.WriteLine("Number of runs: " + index);
+
+        return Tuple.Create(entryIndex, blockString.Length);
     }
 
     public static void Compress()
